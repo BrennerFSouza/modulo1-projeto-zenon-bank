@@ -1,6 +1,7 @@
 package br.com.zenon.fraud;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
@@ -17,6 +18,20 @@ public class Main {
 
         System.out.println(transacao1);
         System.out.println(transacao2);
+
+        System.out.println("Requisitos tarefa 3\n");
+
+        String arquivo = "./data/PS_20174392719_1491204439457_log.csv";
+
+        TransactionIngestor transactionIngestor = new TransactionIngestor(arquivo);
+
+        List<Transaction> transactions = transactionIngestor.listarTransacoes();
+
+        for (int i = 0; i < 10; i++) {
+            System.out.println(transactions.get(i));
+
+        }
+
 
     }
 }
