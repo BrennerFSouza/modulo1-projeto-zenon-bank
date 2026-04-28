@@ -1,14 +1,13 @@
 package br.com.zenon.fraud;
-
-
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.List;
 
 public class TransactionIngestor {
-    private List<Transaction> transactions;
+    private List<Transaction> transactions = new ArrayList<>();
 
     public TransactionIngestor(String documentName) {
         try {
