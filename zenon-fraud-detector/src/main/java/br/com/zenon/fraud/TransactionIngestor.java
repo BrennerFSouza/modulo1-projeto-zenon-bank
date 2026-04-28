@@ -34,8 +34,8 @@ public class TransactionIngestor {
 
                 TransactionCustomer origin = new TransactionCustomer(lineArray[3], new BigDecimal(lineArray[4]), new BigDecimal(lineArray[5]));
                 TransactionCustomer destin = new TransactionCustomer(lineArray[6], new BigDecimal(lineArray[7]), new BigDecimal(lineArray[8]));
-                boolean isFraud = Boolean.parseBoolean(lineArray[9]);
-                boolean isFlaggedFraud = Boolean.parseBoolean(lineArray[10]);
+                boolean isFraud = "1".equals(lineArray[9]);
+                boolean isFlaggedFraud = "1".equals(lineArray[10]);
 
                 Transaction transaction = new Transaction(step, type, amount, origin, destin, isFraud, isFlaggedFraud);
                 transactions.add(transaction);
