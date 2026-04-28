@@ -20,7 +20,7 @@ public class TransactionIngestor {
             int countLines = 0;
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
-                String[] lineArray = line.split(",");
+
                 if (countLines == 0) {
                     countLines++;
                     continue;
@@ -28,16 +28,9 @@ public class TransactionIngestor {
                 if (countLines == 1001) {
                     break;
                 }
-                int step = Integer.parseInt(lineArray[0]);
-                TransactionType type = TransactionType.valueOf(lineArray[1]);
-                BigDecimal amount = new BigDecimal(lineArray[2]);
 
-                TransactionCustomer origin = new TransactionCustomer(lineArray[3], new BigDecimal(lineArray[4]), new BigDecimal(lineArray[5]));
-                TransactionCustomer destin = new TransactionCustomer(lineArray[6], new BigDecimal(lineArray[7]), new BigDecimal(lineArray[8]));
-                boolean isFraud = "1".equals(lineArray[9]);
-                boolean isFlaggedFraud = "1".equals(lineArray[10]);
+                var transaction = parseTransaction(line);
 
-                Transaction transaction = new Transaction(step, type, amount, origin, destin, isFraud, isFlaggedFraud);
                 transactions.add(transaction);
 
                 countLines++;
@@ -47,6 +40,19 @@ public class TransactionIngestor {
             throw new RuntimeException(e);
         }
         return transactions;
+    }
+
+    private Transaction parseTransaction(String line) {
+        String[] lineArray = line.split(",");
+        int step = Integer.parseInt(lineArray[0]);
+        TransactionType type = TransactionType.valueOf(lineArray[1]);
+        BigDecimal amount = new BigDecimal(lineArray[2]);
+
+        TransactionCustomer origin = new TransactionCustomer(lineArray[3], new BigDecimal(lineArray[4]), new BigDecimal(lineArray[5]));
+        TransactionCustomer destin = new TransactionCustomer(lineArray[6], new BigDecimal(lineArray[7]), new BigDecimal(lineArray[8]));
+        boolean isFraud = "1".equals(lineArray[9]);
+        boolean isFlaggedFraud = "1".equals(lineArray[10]);
+        return   new Transaction(step, type, amount, origin, destin, isFraud, isFlaggedFraud);
     }
 }
 
