@@ -25,7 +25,7 @@ public class Main {
 
         TransactionIngestor transactionIngestor = new TransactionIngestor();
 
-        List<Transaction> transactions = transactionIngestor.listarTransacoes(arquivo);
+        List<Transaction> transactions = transactionIngestor.read(arquivo);
 
         for (int i = 0; i < 10; i++) {
             System.out.println(transactions.get(i));

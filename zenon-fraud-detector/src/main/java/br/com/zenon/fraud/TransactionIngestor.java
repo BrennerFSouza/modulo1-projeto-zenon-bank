@@ -9,9 +9,24 @@ import java.util.List;
 import java.util.Scanner;
 
 public class TransactionIngestor {
+    public List<Transaction> read(String documentName){
+        Path path = Path.of("./data/" + documentName);
+        try{
+            List<String> lines = Files.readAllLines(path);
+            return lines.stream()
+                    .skip(1)
+                    .limit(1000)
+                    .map(this::parseTransaction)
+                    .toList();
 
 
-    public List<Transaction> listarTransacoes(String documentName) {
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public List<Transaction> readOld(String documentName) {
         ArrayList<Transaction> transactions = new ArrayList<>();
 
             Path path = Path.of("./data/" + documentName);
