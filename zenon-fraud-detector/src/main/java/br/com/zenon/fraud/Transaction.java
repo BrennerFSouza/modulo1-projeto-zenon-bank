@@ -11,5 +11,7 @@ public record Transaction(
         boolean isFraud,
         boolean isFlaggedFraud) {
 
+
+
 }
 

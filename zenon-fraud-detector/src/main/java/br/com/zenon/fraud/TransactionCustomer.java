@@ -12,4 +12,13 @@ public class TransactionCustomer {
         this.oldBalance = oldBalance;
         this.newBalance = newBalance;
     }
+
+    @Override
+    public String toString() {
+        return "TransactionCustomer{" +
+                "name='" + name + '\'' +
+                ", oldBalance=" + oldBalance +
+                ", newBalance=" + newBalance +
+                '}';
+    }
 }
