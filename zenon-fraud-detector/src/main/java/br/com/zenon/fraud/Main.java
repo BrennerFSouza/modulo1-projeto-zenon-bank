@@ -21,11 +21,11 @@ public class Main {
 
         System.out.println("Requisitos tarefa 3\n");
 
-        String arquivo = "./data/PS_20174392719_1491204439457_log.csv";
+        String arquivo = "PS_20174392719_1491204439457_log.csv";
 
-        TransactionIngestor transactionIngestor = new TransactionIngestor(arquivo);
+        TransactionIngestor transactionIngestor = new TransactionIngestor();
 
-        List<Transaction> transactions = transactionIngestor.listarTransacoes();
+        List<Transaction> transactions = transactionIngestor.listarTransacoes(arquivo);
 
         for (int i = 0; i < 10; i++) {
             System.out.println(transactions.get(i));
