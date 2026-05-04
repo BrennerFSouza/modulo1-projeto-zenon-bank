@@ -9,9 +9,15 @@ public record Transaction(
         TransactionCustomer origin,
         TransactionCustomer destin,
         boolean isFraud,
-        boolean isFlaggedFraud) {
+        boolean isFlaggedFraud){
 
+    public Transaction{
+
+        if (step <= 0)
+            throw new IllegalArgumentException("step should be positive: " + step);
+        if (amount.compareTo(BigDecimal.ZERO) < 0)
+            throw new IllegalArgumentException("amount should be positive: " + amount);
+    }
 
 
 }
-

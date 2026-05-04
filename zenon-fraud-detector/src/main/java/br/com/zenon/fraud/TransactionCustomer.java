@@ -2,35 +2,20 @@ package br.com.zenon.fraud;
 
 import java.math.BigDecimal;
 
-public class TransactionCustomer {
-    private String name;
-    private BigDecimal oldBalance;
-    private BigDecimal newBalance;
+public record TransactionCustomer(
+        String name,
+        BigDecimal oldBalance,
+        BigDecimal newBalance
+){
 
-    public TransactionCustomer(String name, BigDecimal oldBalance, BigDecimal newBalance) {
-        this.name = name;
-        this.oldBalance = oldBalance;
-        this.newBalance = newBalance;
+    public TransactionCustomer{
+        if (name == null || name.isBlank())
+            throw new IllegalArgumentException("name should not be empty");
+        if (oldBalance.compareTo(BigDecimal.ZERO) < 0)
+            throw new IllegalArgumentException("oldBalance should be positive: " + oldBalance);
+        if (newBalance.compareTo(BigDecimal.ZERO) < 0)
+            throw new IllegalArgumentException("newBalance should be positive: " + newBalance);
     }
 
-    public String getName() {
-        return name;
-    }
 
-    public BigDecimal getOldBalance() {
-        return oldBalance;
-    }
-
-    public BigDecimal getNewBalance() {
-        return newBalance;
-    }
-
-    @Override
-    public String toString() {
-        return "TransactionCustomer{" +
-                "name='" + name + '\'' +
-                ", oldBalance=" + oldBalance +
-                ", newBalance=" + newBalance +
-                '}';
-    }
 }
