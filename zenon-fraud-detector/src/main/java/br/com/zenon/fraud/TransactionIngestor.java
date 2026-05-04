@@ -7,7 +7,7 @@ import java.nio.file.Path;
 import java.util.*;
 
 public class TransactionIngestor {
-    public List<Optional<Transaction>> read(String documentName){
+    public List<Transaction> read(String documentName){
         Path path = Path.of("./data/" + documentName);
         try{
             List<String> lines = Files.readAllLines(path);
@@ -15,8 +15,8 @@ public class TransactionIngestor {
                     .skip(1)
                     .limit(1000)
                     .map(this::parseTransaction)
-                    .filter(Objects::nonNull)
-                    .limit(1000)
+                    .filter(Optional::isPresent)
+                    .map(Optional::get)
                     .toList();
 
 

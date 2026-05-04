@@ -39,7 +39,7 @@ public class Main {
 
         String arquivo2 = "paysim_with_bad_data.csv";
 
-        List<Optional<Transaction>> transactionsBadData = transactionIngestor.read(arquivo2);
+        List<Transaction> transactionsBadData = transactionIngestor.read(arquivo2);
 
         for (int i = 0; i < transactionsBadData.size(); i++) {
             System.out.println(transactionsBadData.get(i));
