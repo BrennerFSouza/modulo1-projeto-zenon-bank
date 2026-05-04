@@ -13,6 +13,18 @@ public class TransactionCustomer {
         this.newBalance = newBalance;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public BigDecimal getOldBalance() {
+        return oldBalance;
+    }
+
+    public BigDecimal getNewBalance() {
+        return newBalance;
+    }
+
     @Override
     public String toString() {
         return "TransactionCustomer{" +

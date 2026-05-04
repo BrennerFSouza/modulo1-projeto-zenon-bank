@@ -25,13 +25,13 @@ public class Main {
         String arquivo = "PS_20174392719_1491204439457_log.csv";
 
         TransactionIngestor transactionIngestor = new TransactionIngestor();
-
+/*
         List<Transaction> transactions = transactionIngestor.read(arquivo);
 
         for (int i = 0; i < 10; i++) {
             System.out.println(transactions.get(i));
 
-        }
+        }*/
 
         System.out.println("------------------------------------");
         System.out.println("Requisitos tarefa 4\n");
@@ -41,7 +41,7 @@ public class Main {
         List<Transaction> transactionsBadData = transactionIngestor.read(arquivo2);
 
         for (int i = 0; i < transactionsBadData.size(); i++) {
-            System.out.println(transactions.get(i));
+            System.out.println(transactionsBadData.get(i));
 
         }
 
