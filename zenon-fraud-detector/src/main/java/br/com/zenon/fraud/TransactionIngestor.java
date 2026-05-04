@@ -4,13 +4,10 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Scanner;
+import java.util.*;
 
 public class TransactionIngestor {
-    public List<Transaction> read(String documentName){
+    public List<Optional<Transaction>> read(String documentName){
         Path path = Path.of("./data/" + documentName);
         try{
             List<String> lines = Files.readAllLines(path);
@@ -60,7 +57,7 @@ public class TransactionIngestor {
         return transactions;
     }
 
-    private Transaction parseTransaction(String line) {
+    private Optional<Transaction> parseTransaction(String line) {
         String[] lineArray = line.split(",");
         try{
             if (lineArray[0].isEmpty()) throw new
@@ -109,10 +106,10 @@ public class TransactionIngestor {
                 throw new IllegalArgumentException("destin available should be positive: " + destin.getNewBalance());
             boolean isFraud = "1".equals(lineArray[9]);
             boolean isFlaggedFraud = "1".equals(lineArray[10]);
-            return   new Transaction(step, type, amount, origin, destin, isFraud, isFlaggedFraud);
+            return Optional.of(new Transaction(step, type, amount, origin, destin, isFraud, isFlaggedFraud));
         }catch (Exception e) {
             System.err.println("ERRO: " + line + " | " + e);
-            return null;
+            return Optional.empty();
 
         }
 

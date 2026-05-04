@@ -2,6 +2,7 @@ package br.com.zenon.fraud;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
@@ -38,7 +39,7 @@ public class Main {
 
         String arquivo2 = "paysim_with_bad_data.csv";
 
-        List<Transaction> transactionsBadData = transactionIngestor.read(arquivo2);
+        List<Optional<Transaction>> transactionsBadData = transactionIngestor.read(arquivo2);
 
         for (int i = 0; i < transactionsBadData.size(); i++) {
             System.out.println(transactionsBadData.get(i));
