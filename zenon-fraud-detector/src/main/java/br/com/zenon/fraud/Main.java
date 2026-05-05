@@ -26,13 +26,13 @@ public class Main {
         String arquivo = "PS_20174392719_1491204439457_log.csv";
 
         TransactionIngestor transactionIngestor = new TransactionIngestor();
-/*
+
         List<Transaction> transactions = transactionIngestor.read(arquivo);
 
         for (int i = 0; i < 10; i++) {
             System.out.println(transactions.get(i));
 
-        }*/
+        }
 
         System.out.println("------------------------------------");
         System.out.println("Requisitos tarefa 4\n");
@@ -46,6 +46,20 @@ public class Main {
 
         }
 
+        System.out.println("------------------------------------");
+        System.out.println("Requisitos tarefa 5\n");
+
+        FraudAnalyzer fraudAnalyzer = new FraudAnalyzer(transactions);
+
+        int countFrauds = fraudAnalyzer.countFrauds();
+        System.out.println("1. Total de Fraudes: " + countFrauds);
+
+        List<Transaction> biggestAmounts = fraudAnalyzer.getBiggerstAmount();
+        System.out.println("2. Top 3 Fraudes de Maior Valor:");
+        biggestAmounts.forEach(transaction -> System.out.println(transaction.amount().toPlainString()));
+        System.out.println("3. Clientes Suspeitos:");
+        biggestAmounts.forEach(transaction -> System.out.println(transaction.origin()   ));
 
     }
+
 }

@@ -7,13 +7,14 @@ import java.nio.file.Path;
 import java.util.*;
 
 public class TransactionIngestor {
+    public static final int FRAUD_LIMIT = 50_000;
     public List<Transaction> read(String documentName){
         Path path = Path.of("./data/" + documentName);
         try{
             List<String> lines = Files.readAllLines(path);
             return lines.stream()
                     .skip(1)
-                    .limit(1000)
+                    .limit(FRAUD_LIMIT)
                     .map(this::parseTransaction)
                     .filter(Optional::isPresent)
                     .map(Optional::get)
