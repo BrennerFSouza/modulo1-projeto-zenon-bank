@@ -53,12 +53,16 @@ public class Main {
         int countFrauds = fraudAnalyzer.countFrauds();
         System.out.println("1. Total de Fraudes: " + countFrauds);
 
-        List<Transaction> biggestAmounts = fraudAnalyzer.findHighestFrauds(3);
+        List<Transaction> highestAmounts = fraudAnalyzer.findHighestFrauds(3);
         System.out.println("2. Top 3 Fraudes de Maior Valor:");
-        biggestAmounts.forEach(transaction -> System.out.println(transaction.amount().toPlainString()));
+        highestAmounts.forEach(transaction -> System.out.println(transaction.amount().toPlainString()));
         System.out.println("3. Clientes Suspeitos:");
-        biggestAmounts.forEach(transaction -> System.out.println(transaction.origin()   ));
 
-    }
+        List<String> suspiciousClients = fraudAnalyzer.findTopSuspiciousClients(5);
+        suspiciousClients.forEach(System.out::println);
 
+        BigDecimal totalLost = fraudAnalyzer.sumFraudAmount();
+        System.out.println("4. Prejuízo Total: " + totalLost.toPlainString());
+
+}
 }
