@@ -70,12 +70,19 @@ public class Main {
         Map<TransactionType, Long> fraudCountByType = fraudAnalyzer.countFraudsByType();
         fraudCountByType.forEach((type, count) -> System.out.println(type + ": " + count));
 
-        TransactionListRepository transactionListRepository = new TransactionListRepository(transactions);
+        TransactionRepository transactionRepository;
+        transactionRepository = new TransactionListRepository(transactions);
         String client = "C1868032458";
         long timeBefore = System.nanoTime();
-        transactionListRepository.findTransactionByOriginName(client).ifPresentOrElse(IO::println,() -> IO.println("Transação não encontrada para o cliente " + client));
+        transactionRepository.findTransactionByOriginName(client).ifPresentOrElse(IO::println,() -> IO.println("Transação não encontrada para o cliente " + client));
         long timeAfter = System.nanoTime();
 
+        System.out.println("Tempo de busca: " + (timeAfter - timeBefore) / 1000000 + "ms");
+
+        transactionRepository = new TransactionMapRepository(transactions);
+        timeBefore = System.nanoTime();
+        transactionRepository.findTransactionByOriginName(client).ifPresentOrElse(IO::println,() -> IO.println("Transação não encontrada para o cliente " + client));
+        timeAfter = System.nanoTime();
         System.out.println("Tempo de busca: " + (timeAfter - timeBefore) / 1000000 + "ms");
 
     }
