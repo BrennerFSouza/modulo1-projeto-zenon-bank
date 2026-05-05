@@ -2,7 +2,6 @@ package br.com.zenon.fraud;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Optional;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
@@ -54,7 +53,7 @@ public class Main {
         int countFrauds = fraudAnalyzer.countFrauds();
         System.out.println("1. Total de Fraudes: " + countFrauds);
 
-        List<Transaction> biggestAmounts = fraudAnalyzer.getBiggerstAmount();
+        List<Transaction> biggestAmounts = fraudAnalyzer.findHighestFrauds(3);
         System.out.println("2. Top 3 Fraudes de Maior Valor:");
         biggestAmounts.forEach(transaction -> System.out.println(transaction.amount().toPlainString()));
         System.out.println("3. Clientes Suspeitos:");

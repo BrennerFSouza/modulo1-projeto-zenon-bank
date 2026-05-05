@@ -17,10 +17,10 @@ public class FraudAnalyzer {
                 .count());
     }
 
-    public List<Transaction> getBiggerstAmount(){
+    public List<Transaction> findHighestFrauds(long limit){
         return transactions.stream()
                 .sorted(Comparator.comparing(Transaction::amount).reversed())
-                .limit(3)
+                .limit(limit)
                 .toList();
 
     }
