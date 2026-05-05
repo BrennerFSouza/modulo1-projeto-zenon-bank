@@ -2,6 +2,7 @@ package br.com.zenon.fraud;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
@@ -63,6 +64,10 @@ public class Main {
 
         BigDecimal totalLost = fraudAnalyzer.sumFraudAmount();
         System.out.println("4. Prejuízo Total: " + totalLost.toPlainString());
+        System.out.println("5. Fraudes por Tipo:");
+
+        Map<TransactionType, Long> fraudCountByType = fraudAnalyzer.countFraudsByType();
+        fraudCountByType.forEach((type, count) -> System.out.println(type + ": " + count));
 
 }
 }
