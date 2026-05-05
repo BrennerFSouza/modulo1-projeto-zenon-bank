@@ -3,6 +3,7 @@ package br.com.zenon.fraud;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
@@ -69,5 +70,19 @@ public class Main {
         Map<TransactionType, Long> fraudCountByType = fraudAnalyzer.countFraudsByType();
         fraudCountByType.forEach((type, count) -> System.out.println(type + ": " + count));
 
-}
+        TransactionListRepository transactionListRepository = new TransactionListRepository(transactions);
+        String client = "C1868032458";
+        long timeBefore = System.nanoTime();
+        Optional<Transaction> transactionSearch = transactionListRepository.findTransactionByOriginName(client);
+        long timeAfter = System.nanoTime();
+
+        System.out.println("Tempo de busca: " + (timeAfter - timeBefore) / 1000000 + "ms");
+
+        if (transactionSearch.isPresent()) {
+            System.out.println(transactionSearch.get());
+        }else{
+            System.out.println("Transação não encontrada para o cliente" + client);
+        }
+
+    }
 }
