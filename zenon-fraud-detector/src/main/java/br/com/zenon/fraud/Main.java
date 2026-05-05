@@ -73,16 +73,10 @@ public class Main {
         TransactionListRepository transactionListRepository = new TransactionListRepository(transactions);
         String client = "C1868032458";
         long timeBefore = System.nanoTime();
-        Optional<Transaction> transactionSearch = transactionListRepository.findTransactionByOriginName(client);
+        transactionListRepository.findTransactionByOriginName(client).ifPresentOrElse(IO::println,() -> IO.println("Transação não encontrada para o cliente " + client));
         long timeAfter = System.nanoTime();
 
         System.out.println("Tempo de busca: " + (timeAfter - timeBefore) / 1000000 + "ms");
-
-        if (transactionSearch.isPresent()) {
-            System.out.println(transactionSearch.get());
-        }else{
-            System.out.println("Transação não encontrada para o cliente" + client);
-        }
 
     }
 }
