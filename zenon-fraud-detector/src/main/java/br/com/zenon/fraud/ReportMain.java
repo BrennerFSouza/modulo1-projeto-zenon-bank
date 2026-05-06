@@ -4,6 +4,7 @@ import java.text.NumberFormat;
 import java.util.Currency;
 import java.util.List;
 import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class ReportMain {
     static void main() {
@@ -11,6 +12,8 @@ public class ReportMain {
         var integgerFormatter = NumberFormat.getIntegerInstance(locale);
         var currencyFormatter = NumberFormat.getCurrencyInstance(locale);
         currencyFormatter.setCurrency(Currency.getInstance("USD"));
+
+        ResourceBundle resourceBundle = ResourceBundle.getBundle("report", locale);
 
 
         String arquivo = "PS_20174392719_1491204439457_log.csv";
@@ -26,8 +29,8 @@ public class ReportMain {
         String formattedTotalAmount = currencyFormatter.format(statistics.totalAmount());
 
 
-        System.out.println("Total de linhas: " + formattedTotalTransactions);
-        System.out.println("Total de fraudes: " + formattedTotalFrauds);
-        System.out.println("Valor total transacionado: "    + formattedTotalAmount);
+        System.out.println(resourceBundle.getString("label.total.transactions") + ": " + formattedTotalTransactions);
+        System.out.println(resourceBundle.getString("label.total.frauds") + ": " + formattedTotalFrauds);
+        System.out.println(resourceBundle.getString("label.total.amount") + ": " + formattedTotalAmount);
     }
 }
