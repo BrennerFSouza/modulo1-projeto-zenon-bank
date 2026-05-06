@@ -1,9 +1,15 @@
 package br.com.zenon.fraud;
 
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 
 public class ReportMain {
     static void main() {
+        Locale locale = Locale.of("pt-BR");
+        var integgerFormatter = NumberFormat.getIntegerInstance(locale);
+
+
         String arquivo = "PS_20174392719_1491204439457_log.csv";
 
         System.out.println("------------------------------------");
@@ -12,8 +18,12 @@ public class ReportMain {
         TransactionReport transactionReport = new TransactionReport();
 
         TransactionReport.Statistics statistics = transactionReport.generateReport(arquivo);
-        System.out.println("Total de linhas: " + statistics.totalTransactions());
-        System.out.println("Total de fraudes: " + statistics.totalFrauds());
+        String formattedTotalTransactions = integgerFormatter.format(statistics.totalTransactions());
+        String formattedTotalFrauds = integgerFormatter.format(statistics.totalFrauds());
+
+
+        System.out.println("Total de linhas: " + formattedTotalTransactions);
+        System.out.println("Total de fraudes: " + formattedTotalFrauds);
         System.out.println("Valor total transacionado: " + statistics.totalAmount().toPlainString());
     }
 }
