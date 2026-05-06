@@ -9,6 +9,8 @@ import java.util.Optional;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     static void main() {
+        long timeBefore;
+        long timeAfter;
         Transaction transacao1 = new Transaction(1, TransactionType.PAYMENT, new BigDecimal("9839.64"),
                 new TransactionCustomer("C1231006815", new BigDecimal("170136.0"), new BigDecimal("160296.36")),
                 new TransactionCustomer("M1979787155", new BigDecimal("0.0"), new BigDecimal("0.0")),
@@ -27,8 +29,13 @@ public class Main {
         String arquivo = "PS_20174392719_1491204439457_log.csv";
 
         TransactionIngestor transactionIngestor = new TransactionIngestor();
-
+        timeBefore = System.nanoTime();
         List<Transaction> transactions = transactionIngestor.read(arquivo);
+        timeAfter = System.nanoTime();
+
+        long readAllLinesExecutionTime = (timeAfter - timeBefore) / 1000000;
+
+        long timeElapsed = timeBefore - timeAfter;
 
         for (int i = 0; i < 10; i++) {
             System.out.println(transactions.get(i));
@@ -70,12 +77,15 @@ public class Main {
         Map<TransactionType, Long> fraudCountByType = fraudAnalyzer.countFraudsByType();
         fraudCountByType.forEach((type, count) -> System.out.println(type + ": " + count));
 
+        System.out.println("------------------------------------");
+        System.out.println("Requisitos tarefa 6\n");
+
         TransactionRepository transactionRepository;
         transactionRepository = new TransactionListRepository(transactions);
         String client = "C1868032458";
-        long timeBefore = System.nanoTime();
+        timeBefore = System.nanoTime();
         transactionRepository.findTransactionByOriginName(client).ifPresentOrElse(IO::println,() -> IO.println("Transação não encontrada para o cliente " + client));
-        long timeAfter = System.nanoTime();
+        timeAfter = System.nanoTime();
 
         System.out.println("Tempo de busca: " + (timeAfter - timeBefore) / 1000000 + "ms");
 
@@ -84,6 +94,10 @@ public class Main {
         transactionRepository.findTransactionByOriginName(client).ifPresentOrElse(IO::println,() -> IO.println("Transação não encontrada para o cliente " + client));
         timeAfter = System.nanoTime();
         System.out.println("Tempo de busca: " + (timeAfter - timeBefore) / 1000000 + "ms");
+
+
+
+
 
     }
 }
